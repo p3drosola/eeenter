@@ -1,0 +1,5 @@
+if (flash_messages)
+  each messages, type in flash_messages
+    .messages(class="messages-" + type)
+      each message in messages
+        .message= message

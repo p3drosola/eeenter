@@ -1,3 +1,3 @@
 module.exports = function (server) {
-  return require('connect-ensure-login').ensureLoggedIn('/auth');
+  return require('connect-ensure-login').ensureLoggedIn('/auth/tumblr');
 };

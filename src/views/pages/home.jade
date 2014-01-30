@@ -1,1 +1,25 @@
-p hey ho!
+!!!5
+html
+  head
+    title eeenter
+    link(rel='stylesheet', href='/stylesheets/home.css')
+
+  body(class=body_class)
+    .wrapper(style="background-image:url(#{bg.img})")
+      .box
+        .logos
+          a(href="/dashboard")
+            img(src="images/logo.png" alt="eeenter")
+          //-  text align justify hack
+          = " "
+          a(href="http://fadefade.com", target="_blank")
+            img(src="images/fadefade.png" alt="made by FADE")
+
+        p.subtext browse tumblr in style
+
+        a.button(href='/dashboard')
+          span eeenter
+
+
+
+    a.img-credit(href=bg.post)= "image via: " + bg.credit
