@@ -5,11 +5,12 @@ module.exports = {
 , CONSUMER_SECRET: undefined
 
   // these are optional
-, PORT: 3000
-, HOSTNAME: 'localhost' // used for oauth
+, LISTEN: 3000
+, EXTERNALHOSTNAME: 'http://localhost:3000' // used for oauth
+
 , SESSION_SECRET: 'HODOR-HODOR-HODOR'
 
-, DB_NAME: 'eeenter'
 , DB_HOST: 'localhost'
 , DB_PORT: 6379
+
 };

@@ -28,6 +28,7 @@
     "connect-ensure-login": "~0.1.1",
     "connect-flash": "~0.1.1",
     "newrelic": "~1.1.1",
-    "connect-redis": "~1.4.6"
+    "connect-redis": "~1.4.6",
+    "redis": "~0.10.0"
   }
 }

@@ -17,7 +17,7 @@ module.exports = function (server) {
   passport.use(new TumblrStrategy({
       consumerKey: config.CONSUMER_KEY,
       consumerSecret: config.CONSUMER_SECRET,
-      callbackURL: config.hostname() + '/auth/callback'
+      callbackURL: config.EXTERNALHOSTNAME + '/auth/callback'
     },
     function (token, token_secret, profile, done) {
       var user = {
