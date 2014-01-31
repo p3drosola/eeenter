@@ -1,7 +1,5 @@
 #### Todo
 
-- home page
-- other post types
-- stream infinite scroll
+- chat, audio, answer post types
 - newrelic
 - intercom
