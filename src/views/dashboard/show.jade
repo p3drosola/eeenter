@@ -1,9 +1,5 @@
 extend layout
 block head
-  script(src="/javascripts/stream-show.js")
-block main
-    each post in posts
-      if (post.type === 'photo')
-        each photo in post.photos
-          div.post.photo-post
-            img(src=photo.alt_sizes[0].url, data-post=JSON.stringify(post))
+  link(rel='stylesheet', href='/stylesheets/dashboard.css')
+  script(src="/javascripts/underscore.js")
+  script(src="/javascripts/dashboard.js")

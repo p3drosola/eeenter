@@ -3,13 +3,18 @@ async = require('async');
 
 module.exports = function (servear) {
   return function (req, res, next) {
-    var offset = req.params.offset || 0;
-
-    req.tumblr.dashboard({
-      offset: offset
-    }, function (err, res) {
-      req.posts = res.posts;
-      next();
+    var params = {offset: req.query.offset || 0};
+    if (req.query.type) {
+      params.type = req.query.type;
+    }
+    req.tumblr.dashboard(params, function (err, data) {
+      if (!err) {
+        req.posts = data.posts;
+        next();
+      } else {
+        console.log(err);
+        res.end('error loading posts');
+      }
     });
 
   };

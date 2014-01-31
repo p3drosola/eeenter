@@ -7,16 +7,16 @@ module.exports = function (server) {
   /*
    * Loads & displays the specified stream
    */
-  controller.show = ['ensureLogin', 'tumblr', 'loadDashboard', function (req, res) {
-
-    console.log('posts', req.posts.length);
-
+  controller.show = ['ensureLogin', function (req, res) {
     res.render('dashboard/show', {
       title: 'Dashboard',
       user: req.user,
-      posts: req.posts,
-      body_class: 'stream stream_show'
+      body_class: 'dashboard'
     });
+  }];
+
+  controller.posts = ['ensureLogin', 'tumblr', 'loadDashboard', function (req, res) {
+    res.json(req.posts);
   }];
 
   return controller;

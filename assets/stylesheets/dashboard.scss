@@ -1,0 +1,17 @@
+@import 'reset';
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+.post-photo-wrapper img {
+  opacity: 0;
+  @include transition(opacity, 0.4s, cubic-bezier(.29,.92,.79,.93));
+  &.is-loaded {
+    opacity: 1;
+  }
+}

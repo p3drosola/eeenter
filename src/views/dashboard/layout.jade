@@ -2,20 +2,9 @@
 html
   head
     title #{title} - eeenter
-    link(rel='stylesheet', href='/stylesheets/application.css')
-    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet', type='text/css')
 
-    script(src="/javascripts/underscore.js")
-    script(src="/javascripts/jquery.js")
-    script(src="/javascripts/interface.js")
     block head
 
   body(class=body_class)
-    if (flash_messages)
-      each messages, type in flash_messages
-        .messages(class="messages-" + type)
-          each message in messages
-            .message= message
-
     .main-stream
       block main
