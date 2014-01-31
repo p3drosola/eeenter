@@ -17,7 +17,8 @@
     var url, request;
     if (eeenter.fetching) return;
     eeenter.fetching = true;
-    url = '/dashboard/posts?offset=' + (offset === undefined ? eeenter.posts.length : offset);
+    offset = (offset === undefined ? eeenter.posts.length : offset);
+    url = '/dashboard/posts?offset=' + offset;
     request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.send();
@@ -25,6 +26,7 @@
       callback(JSON.parse(this.response));
       eeenter.fetching = false;
     }
+    ga('send', 'event', 'fetchPosts', offset);
   }
 
   eeenter.handlePosts = function (posts) {

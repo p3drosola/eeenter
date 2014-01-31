@@ -77,7 +77,6 @@ a {
     margin: 20px 0;
     border-left: 2px solid #eee; }
   .post.post--photo .inner {
-    min-height: 100vh;
     text-align: center; }
     .post.post--photo .inner img {
       opacity: 0;
