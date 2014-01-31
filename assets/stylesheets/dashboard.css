@@ -45,12 +45,67 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+body {
+  font-family: sans-serif;
+  font-weight: 200; }
+
+.post {
+  min-height: 100vh;
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: box;
+  box-pack: center;
+  box-align: center; }
+
+.post-photo-wrapper {
+  min-height: 100vh;
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: box;
+  box-pack: center;
+  box-align: center; }
+
 .post-photo-wrapper img {
   opacity: 0;
+  max-width: 100vw;
   -webkit-transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93);
-  -moz-transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93);
-  -ms-transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93);
-  -o-transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93);
   transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93); }
   .post-photo-wrapper img.is-loaded {
     opacity: 1; }
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    opacity: 0; }
+
+  70% {
+    opacity: 1;
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3); }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0; } }
+
+.loading-posts {
+  background: #F7F7F7;
+  color: #bbbbbb;
+  text-align: center;
+  padding: 100px;
+  font-size: 3em;
+  font-weight: 200; }
+  .loading-posts span {
+    display: inline-block;
+    -webkit-animation: pulsate 1.3s cubic-bezier(0.3, 0.93, 0.71, 0.94) 0 infinite normal none running;
+    animation: pulsate 1.3s cubic-bezier(0.3, 0.93, 0.71, 0.94) 0 infinite normal none running;
+    opacity: 0; }

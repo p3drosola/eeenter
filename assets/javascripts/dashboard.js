@@ -7,21 +7,26 @@
 
   eeenter.initialize = function () {
     eeenter.fetchPosts(eeenter.handlePosts);
+    window.addEventListener('scroll', eeenter.detectScrollToBottom);
+
   };
 
   eeenter.fetchPosts = function (callback) {
     var url, request;
+    if (eeenter.fetching) return;
+    eeenter.fetching = true;
     url = '/dashboard/posts?offset=' + eeenter.posts.length + '&type=photo';
     request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.send();
     request.onload = function() {
       callback(JSON.parse(this.response));
+      eeenter.fetching = false;
     }
   }
 
   eeenter.handlePosts = function (posts) {
-    eeenter.posts.concat(posts);
+    eeenter.posts = eeenter.posts.concat(posts);
     var dom = _.compact(_.map(posts, function (post) {
       if (eeenter.templates.posts[post.type]) {
         return eeenter.templates.posts[post.type](post);
@@ -31,6 +36,12 @@
       }
     }));
     eeenter.appendToPage(dom);
+  };
+
+  eeenter.detectScrollToBottom = function(event) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      eeenter.fetchPosts(eeenter.handlePosts);
+    }
   };
 
   eeenter.templates.posts.photo= function (post) {
@@ -63,8 +74,8 @@
   };
 
   eeenter.appendToPage = function (dom_nodes) {
-    var main_stream = document.querySelector('.main-stream');
-    _.each(dom_nodes, main_stream.appendChild.bind(main_stream));
+    var posts_wrapper = document.querySelector('.posts-wrapper');
+    _.each(dom_nodes, posts_wrapper.appendChild.bind(posts_wrapper));
   };
 
 
