@@ -95,10 +95,10 @@ a {
       .details {
         text-align: left;
         max-width: 640px;
-      }
-      .caption {
-        font-size: 13px;
         padding-bottom: 20px;
+      }
+      .caption, .tags {
+        font-size: 13px;
       }
     }
   }

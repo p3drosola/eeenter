@@ -96,10 +96,10 @@ a {
       margin-top: -5px; }
     .post.post--photo .inner .details {
       text-align: left;
-      max-width: 640px; }
-    .post.post--photo .inner .caption {
-      font-size: 13px;
+      max-width: 640px;
       padding-bottom: 20px; }
+    .post.post--photo .inner .caption, .post.post--photo .inner .tags {
+      font-size: 13px; }
   .post.post--text .inner, .post.post--link .inner, .post.post--quote .inner, .post.post--video .inner {
     max-width: 640px;
     margin: 0 20px; }
