@@ -87,7 +87,14 @@
         });
         img.src = photo.alt_sizes[0].url;
         var img = n('img', {src: photo.alt_sizes[0].url});
-        return n('div', {}, [img]);
+        return n('div', {}, [
+          img,
+          div({"class" : "details"}, [
+            eeenter.templates.blogname(post),
+            div({"class": "caption"}, eeenter.parseHTML(post.caption)),
+            eeenter.templates.tags(post)
+          ])
+        ]);
       }))
     ]);
   };
