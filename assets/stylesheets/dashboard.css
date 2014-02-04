@@ -92,6 +92,8 @@ a {
       transition: opacity 0.4s cubic-bezier(0.29, 0.92, 0.79, 0.93); }
       .post.post--photo .inner img.is-loaded {
         opacity: 1; }
+    .post.post--photo .inner .blogname {
+      margin-top: -5px; }
     .post.post--photo .inner .details {
       text-align: left;
       max-width: 640px; }
