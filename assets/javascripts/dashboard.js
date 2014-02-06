@@ -76,8 +76,10 @@
   };
 
   eeenter.templates.posts.photo = function (post) {
-    return eeenter.templates.postWrapper(post, [
-      div({'class': 'inner'}, _.map(post.photos, function (photo) {
+
+    function images (photos) {
+      var output = [];
+      _.each(photos, function (photo) {
         var img = document.createElement('img');
         // add load listener before setting src
         img.addEventListener('load', function () {
@@ -86,16 +88,19 @@
           })
         });
         img.src = photo.alt_sizes[0].url;
-        var img = n('img', {src: photo.alt_sizes[0].url});
-        return n('div', {}, [
-          img,
-          div({"class" : "details"}, [
-            eeenter.templates.blogname(post),
-            div({"class": "caption"}, eeenter.parseHTML(post.caption)),
-            eeenter.templates.tags(post)
-          ])
-        ]);
-      }))
+        output.push(img);
+        output.push(n('br'));
+      });
+      return output;
+    }
+
+    return eeenter.templates.postWrapper(post, [
+      div({'class': 'inner'}, images(post.photos)
+        .concat(div({"class" : "details"}, [
+          eeenter.templates.blogname(post),
+          div({"class": "caption"}, eeenter.parseHTML(post.caption)),
+          eeenter.templates.tags(post)
+        ])))
     ]);
   };
 
