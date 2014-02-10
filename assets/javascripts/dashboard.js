@@ -76,7 +76,6 @@
   };
 
   eeenter.templates.posts.photo = function (post) {
-
     function images (photos) {
       var output = [];
       _.each(photos, function (photo) {
@@ -105,9 +104,13 @@
   };
 
   eeenter.templates.posts.text = function (post) {
+    var blogname = eeenter.templates.blogname(post);
+    var title = n('span', {'class': 'title'}, [post.title]);
+    blogname.appendChild(title);
+
     return eeenter.templates.postWrapper(post, [
       div({'class': 'inner'}, [
-        eeenter.templates.blogname(post),
+        blogname,
         div({}, eeenter.parseHTML(post.body)),
         eeenter.templates.tags(post)
         ])
