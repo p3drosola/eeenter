@@ -1,7 +1,7 @@
 var _ = require('underscore'),
 async = require('async');
 
-module.exports = function (servear) {
+module.exports = function (server) {
   return function (req, res, next) {
     var params = {offset: req.query.offset || 0};
     if (req.query.type) {

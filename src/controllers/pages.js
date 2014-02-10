@@ -5,7 +5,7 @@ module.exports = function (server) {
   var controller = {};
 
 
-  controller.home = [function (req, res) {
+  controller.home = ['session', function (req, res) {
 
     var bgs = [
     {
