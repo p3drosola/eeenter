@@ -105,7 +105,7 @@
 
   eeenter.templates.posts.text = function (post) {
     var blogname = eeenter.templates.blogname(post);
-    var title = n('span', {'class': 'title'}, [post.title]);
+    var title = n('span', {'class': 'title'}, [post.title || '']);
     blogname.appendChild(title);
 
     return eeenter.templates.postWrapper(post, [
@@ -122,7 +122,7 @@
       div({'class': 'inner'}, [
         eeenter.templates.blogname(post),
         n('p', {}, [
-          n('a', {'class': 'post-link', href: post.url}, [post.title])
+          n('a', {'class': 'post-link', href: post.url}, [post.title || ''])
         ])]
         .concat(eeenter.parseHTML(post.description))
         .concat([eeenter.templates.tags(post)])
