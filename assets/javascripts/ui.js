@@ -27,7 +27,17 @@
 
   e.ui.TextPost = React.createClass({
     render: function () {
-      return React.DOM.div({}, this.props.blog_name);
+
+      var header = React.DOM.div({className: 'blogname'},
+        React.DOM.a({href: this.props.post_url, target: '_blank'}, this.props.blog_name),
+        React.DOM.span({className: 'title'}, this.props.title)
+      );
+
+      return React.DOM.div({className: 'inner'}, [
+        header,
+        React.DOM.div({dangerouslySetInnerHTML: {__html: this.props.body}}),
+        e.ui.postTags(this.props.tags)
+      ]);
     }
   });
 
