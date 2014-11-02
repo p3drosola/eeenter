@@ -75,7 +75,12 @@
 
   e.ui.QuotePost = React.createClass({
     render: function () {
-      return React.DOM.div({}, this.props.blog_name);
+      return React.DOM.div({className: 'inner'}, [
+        e.ui.blogName(this.props.blog_name, this.props.post_url),
+        React.DOM.blockquote({dangerouslySetInnerHTML: {__html: this.props.text}}),
+        React.DOM.p({dangerouslySetInnerHTML: {__html: this.props.source}}),
+        e.ui.postTags(this.props.tags)
+      ])
     }
   });
 

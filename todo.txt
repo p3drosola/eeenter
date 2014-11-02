@@ -1,3 +1,5 @@
 #### Todo
 
 - chat, audio, answer post types
+- scroll up for paging
+- scroll up for post type filter
