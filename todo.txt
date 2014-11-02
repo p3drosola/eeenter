@@ -1,5 +1,3 @@
 #### Todo
 
 - chat, audio, answer post types
-- newrelic
-- intercom
