@@ -4,12 +4,12 @@
 
   e.config = {
     page_size: 20,
-    supported_post_types: ['text', 'photo', 'quote', 'link']
+    supported_post_types: ['text', 'photo', 'quote', 'link', 'video']
   };
 
   e.state = {
     page: 0,
-    posts: [],
+    posts: Immutable.OrderedMap(),
     fetching: false
   };
 
@@ -23,23 +23,34 @@
     if (e.state.fetching) return;
     e.state.fetching = true;
 
-    url = '/dashboard/posts?offset=' + e.state.posts.length;
+    url = '/dashboard/posts?offset=' + e.state.posts.size;
 
     request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.send();
     request.onload = e.onFetch;
-    // ga('send', 'event', 'fetchPosts', e.state.posts.length);
   };
 
   e.onFetch = function () {
     e.state.fetching = false;
-    var data = JSON.parse(this.response);
-    // immutable data structures go here, avoid duplicate posts, etc
-    data = data.filter(e.supportsPost);
-    e.state.posts = e.state.posts.concat(data);
+    var json = JSON.parse(this.response);
+    json = json.filter(e.supportsPost);
+
+    e.state.posts.withMutations(function (posts) {
+      json.forEach(function (post) {
+        var map = Immutable.fromJS(post);
+        posts.set('p' + map.get('id'), map);
+      });
+    });
+
     e.render();
   };
+
+  e.onScroll = function (event) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      e.fetch();
+    }
+  }
 
   e.render = function () {
     React.render(React.createElement(e.ui.PostList, e.state), e.body);
@@ -48,6 +59,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     e.body = document.getElementsByTagName('body')[0];
     e.render();
+    window.addEventListener('scroll', e.onScroll);
   });
 
   e.fetch();

@@ -2,30 +2,36 @@
   e.ui = {};
 
   e.ui.PostList = React.createClass({
+    displayName: 'PostList',
     render: function () {
       return React.DOM.div({
         className: 'main-stream'
-      }, null, this.props.posts.map(e.ui.PostWrapper));
+      }, null, this.props.posts.map(function (post) {
+        return React.createElement(e.ui.PostWrapper, {key: 'p' + post.id, data: post})
+      }));
     }
   });
 
   e.ui.PostWrapper = React.createClass({
+    displayName: 'PostWrapper',
     render: function () {
-
+      console.log('render', this.props.data.id);
       var postComponent = ({
         text:  e.ui.TextPost,
         photo: e.ui.PhotoPost,
         quote: e.ui.QuotePost,
-        link:  e.ui.LinkPost
-      })[this.props.type];
+        link:  e.ui.LinkPost,
+        video: e.ui.VideoPost
+      })[this.props.data.type];
 
       return React.DOM.div({
-        className: 'post post--' + this.props.type
-      }, React.createElement(postComponent, this.props));
+        className: 'post post--' + this.props.data.type
+      }, React.createElement(postComponent, this.props.data));
     }
   });
 
   e.ui.TextPost = React.createClass({
+    displayName: 'TextPost',
     render: function () {
 
       var header = React.DOM.div({className: 'blogname'},
@@ -42,6 +48,7 @@
   });
 
   e.ui.PhotoPost = React.createClass({
+    displayName: 'PhotoPost',
     render: function () {
       var photo_factory = React.createFactory(e.ui.Photo);
       var photos = this.props.photos.map(photo_factory); // TODO: <br>
@@ -57,6 +64,7 @@
   });
 
   e.ui.Photo = React.createClass({
+    displayName: 'Photo',
     getInitialState: function () {
       return {loaded: false};
     },
@@ -74,6 +82,7 @@
   });
 
   e.ui.QuotePost = React.createClass({
+    displayName: 'QuotePost',
     render: function () {
       return React.DOM.div({className: 'inner'}, [
         e.ui.blogName(this.props.blog_name, this.props.post_url),
@@ -85,6 +94,7 @@
   });
 
   e.ui.LinkPost = React.createClass({
+    displayName: 'LinkPost',
     render: function () {
       return React.DOM.div({className: 'inner'}, [
         e.ui.blogName(this.props.blog_name, this.props.post_url),
@@ -92,6 +102,19 @@
           React.DOM.a({className: 'post-link', href: this.props.url}, this.props.title)
         ),
         React.DOM.p({dangerouslySetInnerHTML: {__html: this.props.description}}),
+        e.ui.postTags(this.props.tags)
+      ])
+    }
+  });
+
+  e.ui.VideoPost = React.createClass({
+    displayName: 'VideoPost',
+    render: function () {
+      var player = this.props.player[this.props.player.length - 1]
+
+      return React.DOM.div({className: 'inner'}, [
+        e.ui.blogName(this.props.blog_name, this.props.post_url),
+        React.DOM.p({dangerouslySetInnerHTML: {__html: player.embed_code}}),
         e.ui.postTags(this.props.tags)
       ])
     }
