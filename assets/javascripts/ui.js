@@ -86,7 +86,14 @@
 
   e.ui.LinkPost = React.createClass({
     render: function () {
-      return React.DOM.div({}, this.props.blog_name);
+      return React.DOM.div({className: 'inner'}, [
+        e.ui.blogName(this.props.blog_name, this.props.post_url),
+        React.DOM.p({},
+          React.DOM.a({className: 'post-link', href: this.props.url}, this.props.title)
+        ),
+        React.DOM.p({dangerouslySetInnerHTML: {__html: this.props.description}}),
+        e.ui.postTags(this.props.tags)
+      ])
     }
   });
 
